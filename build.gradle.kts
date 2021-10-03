@@ -13,6 +13,10 @@ repositories {
 }
 
 dependencies {
+    implementation("org.xerial:sqlite-jdbc:3.8.11.2")
+    implementation("org.eclipse.jetty:jetty-server:9.4.21.v20190926")
+    implementation("org.eclipse.jetty:jetty-servlet:9.4.21.v20190926")
+
     testImplementation(kotlin("test"))
 }
 
