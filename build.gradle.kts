@@ -17,7 +17,10 @@ dependencies {
     implementation("org.eclipse.jetty:jetty-server:9.4.21.v20190926")
     implementation("org.eclipse.jetty:jetty-servlet:9.4.21.v20190926")
 
+    implementation("org.mockito:mockito-core:3.12.4")
+
     testImplementation(kotlin("test"))
+    testImplementation("org.assertj:assertj-core:3.11.1")
 }
 
 tasks.test {
