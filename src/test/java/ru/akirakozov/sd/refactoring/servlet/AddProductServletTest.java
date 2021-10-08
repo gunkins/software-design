@@ -1,5 +1,6 @@
 package ru.akirakozov.sd.refactoring.servlet;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.SQLException;
@@ -16,7 +17,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import ru.akirakozov.sd.refactoring.model.Product;
-import ru.akirakozov.sd.refactoring.util.DbUtils;
+import ru.akirakozov.sd.refactoring.util.TestDatabaseManager;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
@@ -25,14 +26,16 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class AddProductServletTest {
-    private final AddProductServlet addProductServlet = new AddProductServlet();
-    private final HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
-    private final HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
+    private static final TestDatabaseManager dbManager = new TestDatabaseManager();
+    private static final AddProductServlet addProductServlet = new AddProductServlet(dbManager);
+
+    private static final HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
+    private static final HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
 
     @BeforeAll
     public static void setupDb() throws SQLException {
-        DbUtils.initProductsTable();
-        DbUtils.clearProductsTable();
+        dbManager.initProductsTable();
+        dbManager.clearProductsTable();
     }
 
     @BeforeEach
@@ -42,7 +45,7 @@ public class AddProductServletTest {
 
     @AfterEach
     public void clear() throws SQLException {
-        DbUtils.clearProductsTable();
+        dbManager.clearProductsTable();
     }
 
     @Test
@@ -92,8 +95,8 @@ public class AddProductServletTest {
         );
     }
 
-    private List<Product> getProducts() throws SQLException {
-        return DbUtils.executeQuery(
+    private List<Product> getProducts() throws SQLException, IOException {
+        return dbManager.executeQuery(
                 "SELECT * FROM PRODUCT",
                 rs -> new Product(rs.getString("name"), rs.getLong("price"))
         );

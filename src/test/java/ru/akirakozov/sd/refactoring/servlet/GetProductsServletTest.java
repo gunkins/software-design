@@ -17,21 +17,23 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import ru.akirakozov.sd.refactoring.model.Product;
-import ru.akirakozov.sd.refactoring.util.DbUtils;
+import ru.akirakozov.sd.refactoring.util.TestDatabaseManager;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 public class GetProductsServletTest {
-    private final GetProductsServlet getProductServlet = new GetProductsServlet();
-    private final HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
-    private final HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
+    private static final TestDatabaseManager dbManager = new TestDatabaseManager();
+    private static final GetProductsServlet getProductServlet = new GetProductsServlet(dbManager);
+
+    private static final HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
+    private static final HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
     private StringWriter stringWriter;
 
     @BeforeAll
     public static void setupDb() throws SQLException {
-        DbUtils.initProductsTable();
-        DbUtils.clearProductsTable();
+        dbManager.initProductsTable();
+        dbManager.clearProductsTable();
     }
 
     @BeforeEach
@@ -42,7 +44,7 @@ public class GetProductsServletTest {
 
     @AfterEach
     public void clear() throws SQLException {
-        DbUtils.clearProductsTable();
+        dbManager.clearProductsTable();
     }
 
     @Test
@@ -65,7 +67,7 @@ public class GetProductsServletTest {
                 new Product("chair", 10)
         );
 
-        DbUtils.insertProducts(products);
+        dbManager.insertProducts(products);
 
         getProductServlet.doGet(request, response);
 

@@ -16,16 +16,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import ru.akirakozov.sd.refactoring.model.Product;
-import ru.akirakozov.sd.refactoring.util.DbUtils;
+import ru.akirakozov.sd.refactoring.util.TestDatabaseManager;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 public class QueryServletTest {
-    private final QueryServlet queryServlet = new QueryServlet();
-    private final HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
-    private final HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
+    private static final TestDatabaseManager dbManager = new TestDatabaseManager();
+    private static final QueryServlet queryServlet = new QueryServlet(dbManager);
+
+    private static final HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
+    private static final HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
     private StringWriter stringWriter;
 
     private final List<Product> products = Arrays.asList(
@@ -36,8 +38,8 @@ public class QueryServletTest {
 
     @BeforeAll
     public static void setupDb() throws SQLException {
-        DbUtils.initProductsTable();
-        DbUtils.clearProductsTable();
+        dbManager.initProductsTable();
+        dbManager.clearProductsTable();
     }
 
     @BeforeEach
@@ -48,7 +50,7 @@ public class QueryServletTest {
 
     @AfterEach
     public void clear() throws SQLException {
-        DbUtils.clearProductsTable();
+        dbManager.clearProductsTable();
     }
 
     @Test
@@ -103,7 +105,7 @@ public class QueryServletTest {
 
     private void testCommandOnData(String command, List<Product> data, String expectedResponseBody) throws Exception {
         mockCommand(command);
-        DbUtils.insertProducts(data);
+        dbManager.insertProducts(data);
         queryServlet.doGet(request, response);
 
         String responseString = stringWriter.getBuffer().toString();
