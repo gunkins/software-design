@@ -1,4 +1,4 @@
-package ru.akirakozov.sd.refactoring.model;
+package ru.akirakozov.sd.refactoring.dao.model;
 
 import java.util.Objects;
 

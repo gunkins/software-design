@@ -16,7 +16,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import ru.akirakozov.sd.refactoring.model.Product;
+import ru.akirakozov.sd.refactoring.dao.ProductDao;
+import ru.akirakozov.sd.refactoring.dao.model.Product;
 import ru.akirakozov.sd.refactoring.util.TestDatabaseManager;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,7 +28,8 @@ import static org.mockito.Mockito.when;
 
 public class AddProductServletTest {
     private static final TestDatabaseManager dbManager = new TestDatabaseManager();
-    private static final AddProductServlet addProductServlet = new AddProductServlet(dbManager);
+    private static final ProductDao productDao = new ProductDao(dbManager);
+    private static final AddProductServlet addProductServlet = new AddProductServlet(productDao);
 
     private static final HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
     private static final HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
@@ -44,12 +46,12 @@ public class AddProductServletTest {
     }
 
     @AfterEach
-    public void clear() throws SQLException {
+    public void clear() {
         dbManager.clearProductsTable();
     }
 
     @Test
-    public void testAddOneProduct() throws Exception {
+    public void testAddOneProduct() throws IOException {
         Product product = new Product("milk", 80);
 
         when(request.getParameter(eq("name"))).thenReturn(product.getName());
@@ -66,7 +68,7 @@ public class AddProductServletTest {
     }
 
     @Test
-    public void testAddMultipleProducts() throws Exception {
+    public void testAddMultipleProducts() throws IOException {
         List<Product> products = new ArrayList<>();
         products.add(new Product("chicken", 300));
         products.add(new Product("beef", 600));
@@ -95,7 +97,7 @@ public class AddProductServletTest {
         );
     }
 
-    private List<Product> getProducts() throws SQLException, IOException {
+    private List<Product> getProducts() {
         return dbManager.executeQuery(
                 "SELECT * FROM PRODUCT",
                 rs -> new Product(rs.getString("name"), rs.getLong("price"))

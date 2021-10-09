@@ -6,16 +6,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ru.akirakozov.sd.refactoring.database.DatabaseManager;
+import ru.akirakozov.sd.refactoring.dao.ProductDao;
+import ru.akirakozov.sd.refactoring.dao.model.Product;
 
 /**
  * @author akirakozov
  */
 public class AddProductServlet extends HttpServlet {
-    private final DatabaseManager databaseManager;
+    private final ProductDao productDao;
 
-    public AddProductServlet(DatabaseManager databaseManager) {
-        this.databaseManager = databaseManager;
+    public AddProductServlet(ProductDao productDao) {
+        this.productDao = productDao;
     }
 
     @Override
@@ -23,13 +24,7 @@ public class AddProductServlet extends HttpServlet {
         String name = request.getParameter("name");
         long price = Long.parseLong(request.getParameter("price"));
 
-        try {
-            String sql = "INSERT INTO PRODUCT " +
-                    "(NAME, PRICE) VALUES (\"" + name + "\"," + price + ")";
-            databaseManager.executeUpdate(sql);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        productDao.insert(new Product(name, price));
 
         response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);

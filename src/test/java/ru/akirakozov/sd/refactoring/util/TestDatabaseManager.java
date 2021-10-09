@@ -1,10 +1,9 @@
 package ru.akirakozov.sd.refactoring.util;
 
-import java.sql.SQLException;
 import java.util.List;
 
+import ru.akirakozov.sd.refactoring.dao.model.Product;
 import ru.akirakozov.sd.refactoring.database.DatabaseManager;
-import ru.akirakozov.sd.refactoring.model.Product;
 
 public class TestDatabaseManager extends DatabaseManager {
     private static final String TEST_DATABASE_URL = "jdbc:sqlite:test.db";
@@ -22,15 +21,15 @@ public class TestDatabaseManager extends DatabaseManager {
         super(TEST_DATABASE_URL);
     }
 
-    public void initProductsTable() throws SQLException {
+    public void initProductsTable() {
         executeUpdate(CREATE_PRODUCT);
     }
 
-    public void clearProductsTable() throws SQLException {
+    public void clearProductsTable() {
         executeUpdate(DELETE_PRODUCTS);
     }
 
-    public void insertProducts(List<Product> products) throws SQLException {
+    public void insertProducts(List<Product> products) {
         for (Product product : products) {
             executeUpdate("" +
                     "INSERT INTO PRODUCT " +
