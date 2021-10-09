@@ -8,13 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ru.akirakozov.sd.refactoring.dao.ProductDao;
-
-import static ru.akirakozov.sd.refactoring.html.HtmlBuilder.br;
-import static ru.akirakozov.sd.refactoring.html.HtmlBuilder.h1;
-import static ru.akirakozov.sd.refactoring.html.HtmlBuilder.htmlBody;
-import static ru.akirakozov.sd.refactoring.html.HtmlBuilder.ifPresent;
-import static ru.akirakozov.sd.refactoring.html.HtmlBuilder.join;
-import static ru.akirakozov.sd.refactoring.html.HtmlBuilder.string;
+import ru.akirakozov.sd.refactoring.servlet.command.CommandFactory;
+import ru.akirakozov.sd.refactoring.servlet.command.CommandHandler;
 
 /**
  * @author akirakozov
@@ -29,35 +24,9 @@ public class QueryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String command = request.getParameter("command");
-        PrintWriter responseWriter = response.getWriter();
 
-        if ("max".equals(command)) {
-            htmlBody(
-                    h1("Product with max price: "),
-                    ifPresent(productDao.getProductWithMaximumPrice(), product ->
-                            join(
-                                    string(product.getName() + "\t" + product.getPrice()),
-                                    br()
-                            )
-                    )
-            ).render(responseWriter);
-        } else if ("min".equals(command)) {
-            htmlBody(
-                    h1("Product with min price: "),
-                    ifPresent(productDao.getProductWithMinimumPrice(), product ->
-                            join(
-                                    string(product.getName() + "\t" + product.getPrice()),
-                                    br()
-                            )
-                    )
-            ).render(responseWriter);
-        } else if ("sum".equals(command)) {
-            htmlBody(string("Summary price: " + productDao.getProductPriceSum())).render(responseWriter);
-        } else if ("count".equals(command)) {
-            htmlBody(string("Number of products: " + productDao.getProductCount())).render(responseWriter);
-        } else {
-            responseWriter.println("Unknown command: " + command);
-        }
+        CommandHandler commandHandler = CommandFactory.getCommandHandler(command, productDao);
+        commandHandler.writeResult(response.getWriter());
 
         response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);
