@@ -8,3 +8,4 @@ pluginManagement {
 include("lrucache")
 include("vkstatistics")
 include("refactoring")
+include("mvc")
