@@ -1,4 +1,4 @@
-package com.github.gunkins.homework1
+package com.github.gunkins.lrucache
 
 class LruCache<K, V>(private val capacity: Int) {
 

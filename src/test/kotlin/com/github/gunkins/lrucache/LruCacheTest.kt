@@ -1,4 +1,4 @@
-package com.github.gunkins.homework1
+package com.github.gunkins.lrucache
 
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
