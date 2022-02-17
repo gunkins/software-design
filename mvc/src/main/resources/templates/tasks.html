@@ -1,0 +1,61 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<style>
+    .task {
+        width: 500px;
+        height: 30px;
+    }
+
+    .task a {
+        float: left;
+        padding: 2px 2px;
+    }
+
+    .task .right {
+        display: inline;
+        float: right;
+    }
+
+    .task .right .finished {
+        width: 100px;
+        text-align: center;
+    }
+
+    .task .right form {
+        display: inline;
+    }
+
+    button {
+        margin: 2px 2px;
+    }
+</style>
+
+<body>
+<th:block th:each="task: ${tasks}">
+    <div class="task">
+        <a th:text="${task.description}"> </a>
+
+        <div class="right">
+            <a class="finished" th:if="${task.finished}">Готово</a>
+            <form th:unless="${task.finished}" th:action="@{__${#request.requestURI}__/__${task.id}__/finish}"
+                    class="finished" method="POST">
+                <button type="submit">Завершить</button>
+            </form>
+
+            <form th:action="@{__${#request.requestURI}__/__${task.id}__/delete}" method="POST">
+                <button type="submit">Удалить</button>
+            </form>
+        </div>
+    </div>
+</th:block>
+
+<form th:object="${taskForm}" method="POST" th:action="@{__${#request.requestURI}__/add}">
+    <label>
+        <input type="text" th:field="*{description}" />
+    </label>
+    <input type="submit" value="Добавить задание">
+</form>
+
+</body>
+</html>

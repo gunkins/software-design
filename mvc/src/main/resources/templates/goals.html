@@ -1,0 +1,49 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<style>
+    .goal {
+        width: 500px;
+        height: 30px;
+    }
+
+    .goal a {
+        float: left;
+        padding: 2px 2px;
+    }
+
+    .goal .right {
+        display: inline;
+        float: right;
+    }
+
+    .goal .right form {
+        display: inline;
+    }
+
+    button {
+        margin: 2px 2px;
+    }
+</style>
+<body>
+<th:block th:each="goal : ${goals}">
+    <div class="goal">
+        <a th:href="|/goals/${goal.id}/tasks|" th:text="${goal.name}"> </a>
+
+        <div class="right">
+            <form th:action="|/goals/${goal.id}/delete|" method="POST">
+                <button type="submit">Удалить</button>
+            </form>
+        </div>
+    </div>
+</th:block>
+
+<form th:object="${goalForm}" method="POST" action="/goals/add">
+    <label>
+        <input type="text" th:field="*{name}" />
+    </label>
+    <input type="submit" value="Добавить цель">
+</form>
+
+</body>
+</html>
