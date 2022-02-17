@@ -1,29 +1,29 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompile
 
 plugins {
-    kotlin("jvm") version "1.6.10"
-    application
+    id("org.jetbrains.kotlin.jvm") apply false
 }
 
-group = "me.ntngunkin"
-version = "1.0-SNAPSHOT"
+subprojects {
+    version = "1.0.0"
 
-repositories {
-    mavenCentral()
-}
+    apply(plugin = "org.jetbrains.kotlin.jvm")
 
-dependencies {
-    testImplementation(kotlin("test"))
-}
+    repositories {
+        mavenCentral()
+    }
 
-tasks.test {
-    useJUnitPlatform()
-}
+    dependencies {
+        "testImplementation"(kotlin("test"))
+    }
 
-tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "17"
-}
+    tasks.withType<Test>().all {
+        useJUnitPlatform()
+    }
 
-application {
-    mainClass.set("MainKt")
+    tasks.withType<KotlinJvmCompile> {
+        kotlinOptions {
+            jvmTarget = "17"
+        }
+    }
 }

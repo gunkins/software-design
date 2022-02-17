@@ -1,3 +1,8 @@
+pluginManagement {
+    plugins {
+        val kotlinVersion: String by settings
+        kotlin("jvm").version(kotlinVersion)
+    }
+}
 
-rootProject.name = "SoftwareDesign"
-
+include("lrucache")
