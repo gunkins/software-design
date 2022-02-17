@@ -6,3 +6,4 @@ pluginManagement {
 }
 
 include("lrucache")
+include("vkstatistics")
