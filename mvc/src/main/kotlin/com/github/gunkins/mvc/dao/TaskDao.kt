@@ -1,6 +1,6 @@
-package com.github.ntngunkin.homework4.dao
+package com.github.gunkins.mvc.dao
 
-import com.github.ntngunkin.homework4.model.Task
+import com.github.gunkins.mvc.model.Task
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 import org.springframework.stereotype.Repository
 

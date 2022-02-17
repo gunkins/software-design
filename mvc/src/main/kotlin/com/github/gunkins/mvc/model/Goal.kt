@@ -1,4 +1,4 @@
-package com.github.ntngunkin.homework4.model
+package com.github.gunkins.mvc.model
 
 data class Goal(
     val id: Int,

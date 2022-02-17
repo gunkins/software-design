@@ -1,9 +1,9 @@
-package com.github.ntngunkin.homework4.controller
+package com.github.gunkins.mvc.controller
 
 
-import com.github.ntngunkin.homework4.dao.GoalDao
-import com.github.ntngunkin.homework4.dao.TaskDao
-import com.github.ntngunkin.homework4.model.GoalForm
+import com.github.gunkins.mvc.dao.GoalDao
+import com.github.gunkins.mvc.dao.TaskDao
+import com.github.gunkins.mvc.model.GoalForm
 import org.springframework.stereotype.Controller
 import org.springframework.ui.ModelMap
 import org.springframework.web.bind.annotation.GetMapping

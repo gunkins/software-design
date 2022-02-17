@@ -1,4 +1,4 @@
-package com.github.ntngunkin.homework4
+package com.github.gunkins.mvc
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
