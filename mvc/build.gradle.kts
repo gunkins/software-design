@@ -5,7 +5,7 @@ plugins {
 }
 apply(plugin = "io.spring.dependency-management")
 
-group = "me.gunkins"
+group = "com.github.gunkins"
 
 repositories {
     mavenCentral()
