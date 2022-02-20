@@ -2,7 +2,7 @@ plugins {
     application
 }
 
-group = "me.gunkins"
+group = "com.github.gunkins"
 
 dependencies {
     val ktorVersion: String by project

@@ -1,1 +1,1 @@
-group = "me.gunkins"
+group = "com.github.gunkins"
