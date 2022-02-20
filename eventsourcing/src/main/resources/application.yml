@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    type:
+    url:
+    username:
+    password:
+    hikari:
+      idle-timeout: 10000

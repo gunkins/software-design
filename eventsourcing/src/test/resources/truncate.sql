@@ -1,0 +1,1 @@
+truncate table membership_events, pass_events;
