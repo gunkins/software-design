@@ -35,5 +35,5 @@ dependencies {
 }
 
 application {
-    mainClass.set("com.github.gunkins.MainKt")
+    mainClass.set("com.github.gunkins.serp.MainKt")
 }

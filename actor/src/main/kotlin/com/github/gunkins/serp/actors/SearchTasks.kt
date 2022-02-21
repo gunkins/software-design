@@ -1,7 +1,7 @@
-package com.github.gunkins.actors
+package com.github.gunkins.serp.actors
 
-import com.github.gunkins.client.OrganicResult
-import com.github.gunkins.client.SearchResponse
+import com.github.gunkins.serp.client.OrganicResult
+import com.github.gunkins.serp.client.SearchResponse
 import java.time.Duration
 import java.util.concurrent.CompletableFuture
 import java.util.function.Supplier

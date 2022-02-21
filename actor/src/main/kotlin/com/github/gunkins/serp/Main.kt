@@ -1,16 +1,16 @@
-package com.github.gunkins
+package com.github.gunkins.serp
 
-import com.github.gunkins.actors.MasterActor
-import com.github.gunkins.actors.SearchTasks
+import com.github.gunkins.serp.actors.MasterActor
+import com.github.gunkins.serp.actors.SearchTasks
 import akka.actor.typed.ActorRef
 import akka.actor.typed.ActorSystem
 import akka.actor.typed.Props
 import akka.actor.typed.SpawnProtocol
 import akka.actor.typed.javadsl.AskPattern
-import com.github.gunkins.client.OrganicResult
-import com.github.gunkins.client.SearchResponse
-import com.github.gunkins.client.SerpClient
-import com.github.gunkins.client.SerpEngine
+import com.github.gunkins.serp.client.OrganicResult
+import com.github.gunkins.serp.client.SearchResponse
+import com.github.gunkins.serp.client.SerpClient
+import com.github.gunkins.serp.client.SerpEngine
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.typesafe.config.ConfigFactory
 import io.ktor.application.*
