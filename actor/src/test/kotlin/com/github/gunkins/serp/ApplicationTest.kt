@@ -1,13 +1,15 @@
+package com.github.gunkins.serp
+
 import akka.actor.typed.ActorSystem
 import akka.actor.typed.SpawnProtocol
-import com.github.gunkins.client.OrganicResult
-import com.github.gunkins.client.RequestInfo
-import com.github.gunkins.client.SearchResponse
-import com.github.gunkins.client.SerpClient
-import com.github.gunkins.client.SerpEngine
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import com.github.gunkins.appModule
+import com.github.gunkins.serp.appModule
+import com.github.gunkins.serp.client.OrganicResult
+import com.github.gunkins.serp.client.RequestInfo
+import com.github.gunkins.serp.client.SearchResponse
+import com.github.gunkins.serp.client.SerpClient
+import com.github.gunkins.serp.client.SerpEngine
 import io.ktor.application.*
 import io.ktor.config.*
 import io.ktor.http.*

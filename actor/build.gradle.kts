@@ -11,7 +11,6 @@ dependencies {
     val mockkVersion: String by project
     val akkaVersion = "2.6.18"
 
-    implementation("com.fasterxml.jackson.core:jackson-annotations:2.10.2")
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
     implementation("io.ktor:ktor-server-netty:$ktorVersion")
     implementation("io.ktor:ktor-server-core:$ktorVersion")
@@ -35,5 +34,5 @@ dependencies {
 }
 
 application {
-    mainClass.set("com.github.gunkins.MainKt")
+    mainClass.set("com.github.gunkins.serp.MainKt")
 }

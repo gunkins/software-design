@@ -1,4 +1,4 @@
-package com.github.gunkins.client
+package com.github.gunkins.serp.client
 
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*

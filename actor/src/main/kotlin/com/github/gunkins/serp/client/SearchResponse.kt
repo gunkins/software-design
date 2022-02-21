@@ -1,4 +1,4 @@
-package com.github.gunkins.client
+package com.github.gunkins.serp.client
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty

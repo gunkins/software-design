@@ -1,4 +1,4 @@
-package com.github.gunkins.actors
+package com.github.gunkins.serp.actors
 
 import akka.actor.typed.Behavior
 import akka.actor.typed.ChildFailed
@@ -6,8 +6,8 @@ import akka.actor.typed.javadsl.AbstractBehavior
 import akka.actor.typed.javadsl.ActorContext
 import akka.actor.typed.javadsl.Behaviors
 import akka.actor.typed.javadsl.Receive
-import com.github.gunkins.client.OrganicResult
-import com.github.gunkins.client.SearchResponse
+import com.github.gunkins.serp.client.OrganicResult
+import com.github.gunkins.serp.client.SearchResponse
 import java.util.concurrent.CompletableFuture
 
 class MasterActor private constructor(

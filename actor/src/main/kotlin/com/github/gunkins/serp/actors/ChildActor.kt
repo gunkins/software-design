@@ -1,4 +1,4 @@
-package com.github.gunkins.actors
+package com.github.gunkins.serp.actors
 
 import akka.actor.typed.ActorRef
 import akka.actor.typed.Behavior
@@ -6,7 +6,7 @@ import akka.actor.typed.javadsl.AbstractBehavior
 import akka.actor.typed.javadsl.ActorContext
 import akka.actor.typed.javadsl.Behaviors
 import akka.actor.typed.javadsl.Receive
-import com.github.gunkins.client.SearchResponse
+import com.github.gunkins.serp.client.SearchResponse
 import java.util.function.Supplier
 
 class ChildActor private constructor(
